@@ -47,14 +47,16 @@ public class Tamagotchi {
 
     public void exibirStatus(){
         System.out.println();
-        System.out.println("Status do tamagochi:");
+        System.out.println("Status de: " + getNome());
         System.out.println("- Fome: " + fome);
         System.out.println("- Felicidade: " + felicidade);
+        System.out.println("- Roupa: " + emoji);
         System.out.println();
     }
 
     public void alimentar(){
-        fome -= 20;
+        fome -= 10;
+        felicidade += 10;
         if (fome < 0){
             fome = 0;
         }
@@ -64,7 +66,7 @@ public class Tamagotchi {
             felicidade = 100;
         }
 
-        System.out.println("Eba! O tamagtchi foi alimentado! :D");
+        System.out.println("Nhan, nhan..." + getNome() + " adorou o lanchinho! :D");
         exibirStatus();
     }
 
@@ -73,16 +75,17 @@ public class Tamagotchi {
         if (felicidade > 100){
             felicidade = 100;
         }
-        System.out.println("Ownt... Tamagotchi está feliz por ter recebido um dengo >.<");
+        System.out.println("Ownt... " + getNome() + " está feliz por ter recebido um dengo >.<");
         exibirStatus();
     }
 
     public void passear(){
         felicidade += 10;
+        fome += 20;
         if (felicidade > 100){
             felicidade = 100;
         }
-        System.out.println("Uhu! Parece que o tamagotchi adorou o passeio (:");
+        System.out.println("Uhu! Parece que " + getNome() + " adorou o passeio (:");
         exibirStatus();
     }
 
@@ -102,10 +105,10 @@ public class Tamagotchi {
 
         if (fome >= 100 || felicidade <= 0){
             System.out.println();
-            System.out.println("Não sabemos bem como dizer isso, mas...");
+            System.out.println("Não sabemos bem como dizer isso...");
             System.out.println("Bem...");
-            System.out.println("Sentimos muito, mas... " + getNome() + " não está mais entre nós.");
-            //exibirStatus();
+            System.out.println("Sentimos muito, mas... ");
+            System.out.println(getNome() + " não está mais entre nós.");
             jogoRodando = false;
         }
         exibirStatus();

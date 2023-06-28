@@ -1,94 +1,118 @@
 import java.util.Scanner;
 
 public class Tamagotchi {
+
+    //Atributos
+    private String nome;
     private int fome;
     private int felicidade;
     private String emoji;
+    private boolean jogoRodando;
 
+    //Construtor
     public Tamagotchi() {
         fome = 0;
         felicidade = 100;
         emoji = "😺";
+        jogoRodando = true;
     }
 
-    public void alimentar() {
+    //Getters e setters
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getFome() {
+        return fome;
+    }
+
+    public int getFelicidade() {
+        return felicidade;
+    }
+
+    public String getEmoji() {
+        return emoji;
+    }
+
+    public boolean isJogoRodando() {
+        return jogoRodando;
+    }
+
+    //Métodos
+    //ToDo implementar aumento de fome e felicidade de forma aleatório (definir se é uma boa ideia)
+
+    public void exibirStatus(){
+        System.out.println();
+        System.out.println("Status do tamagochi:");
+        System.out.println("- Fome: " + fome);
+        System.out.println("- Felicidade: " + felicidade);
+        System.out.println();
+    }
+
+    public void alimentar(){
         fome -= 20;
-        if (fome < 0) {
+        if (fome < 0){
             fome = 0;
         }
-        felicidade += 10;
-        if (felicidade > 100) {
-            felicidade = 100;
-        }
-        System.out.println("Você alimentou o tamagotchi. Fome: " + fome + ", Felicidade: " + felicidade);
-    }
 
-    public void carinho() {
         felicidade += 20;
-        if (felicidade > 100) {
+        if (felicidade > 100){
             felicidade = 100;
         }
-        System.out.println("Você deu carinho ao tamagotchi. Fome: " + fome + ", Felicidade: " + felicidade);
+
+        System.out.println("Eba! O tamagtchi foi alimentado! :D");
+        exibirStatus();
     }
 
-    public void passear() {
+    public void darCarinho(){
+        felicidade += 20;
+        if (felicidade > 100){
+            felicidade = 100;
+        }
+        System.out.println("Ownt... Tamagotchi está feliz por ter recebido um dengo >.<");
+        exibirStatus();
+    }
+
+    public void passear(){
         felicidade += 10;
-        if (felicidade > 100) {
+        if (felicidade > 100){
             felicidade = 100;
         }
-        System.out.println("Você levou o tamagotchi para passear. Fome: " + fome + ", Felicidade: " + felicidade);
+        System.out.println("Uhu! Parece que o tamagotchi adorou o passeio (:");
+        exibirStatus();
     }
 
-    public void trocarRoupa(String novoEmoji) {
-        emoji = novoEmoji;
-        System.out.println("Você trocou a roupa do tamagotchi. Novo emoji: " + emoji);
-    }
-
-    public void passarTempo() {
-        fome += 5;
+    public void passarTempo(){
+        fome += 7;
         felicidade -= 5;
-        if (fome >= 100 || felicidade <= 0) {
-            System.out.println("Seu tamagotchi morreu!");
-            System.exit(0);
+        System.out.println();
+        System.out.println("Algum tempo se passou...");
+
+        if (fome > 100){
+            fome = 100;
         }
-        System.out.println("Passou o tempo. Fome: " + fome + ", Felicidade: " + felicidade);
+
+        if (felicidade < 0){
+            felicidade = 0;
+        }
+
+        if (fome >= 100 || felicidade <= 0){
+            System.out.println();
+            System.out.println("Não sabemos bem como dizer isso, mas...");
+            System.out.println("Bem...");
+            System.out.println("Sentimos muito, mas... " + getNome() + " não está mais entre nós.");
+            //exibirStatus();
+            jogoRodando = false;
+        }
+        exibirStatus();
     }
 
-    public static void main(String[] args) {
-        Tamagotchi tamagotchi = new Tamagotchi();
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("O que você quer fazer?");
-            System.out.println("1. Alimentar");
-            System.out.println("2. Dar carinho");
-            System.out.println("3. Levar para passear");
-            System.out.println("4. Trocar de roupa");
-            System.out.println("5. Passar o tempo");
-
-            int opcao = scanner.nextInt();
-
-            switch (opcao) {
-                case 1:
-                    tamagotchi.alimentar();
-                    break;
-                case 2:
-                    tamagotchi.carinho();
-                    break;
-                case 3:
-                    tamagotchi.passear();
-                    break;
-                case 4:
-                    System.out.println("Digite o novo emoji: ");
-                    String novoEmoji = scanner.next();
-                    tamagotchi.trocarRoupa(novoEmoji);
-                    break;
-                case 5:
-                    tamagotchi.passarTempo();
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
-            }
-        }
+    public void trocarRoupa(String novoEmoji){
+        emoji = novoEmoji;
     }
+
 }
